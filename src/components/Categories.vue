@@ -2,11 +2,14 @@
   <div class="categories">
     <div class="title">Catalog</div>
     <div class="list">
-      <router-link :class="{ 'selected': category === selectedCategory }" :to="{ name: 'main' }">
-        All
-      </router-link>
-      <router-link :class="{ 'selected': category === selectedCategory }" v-for="category in categories" :key="category"
-        :to="{ path: `/category/${category}` }">
+      <router-link
+        class="link"
+        v-for="category in categories"
+        :key="category"
+        :to="{ path: `/category/${category}` }"
+        @click="pushCategory(category)"
+        :class="{ selected: category === this.selectedCategory }"
+      >
         {{ category }}
       </router-link>
     </div>
@@ -14,20 +17,23 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 
 export default {
-  props: ['categories'],
-  data() {
-    return {
-      newData: []
-    }
+  props: ["categories"],
+  computed: {
+    ...mapState(["selectedCategory"]),
   },
-}
+  methods: {
+    pushCategory(category) {
+      this.$store.dispatch("SELECT_CATEGORY", category);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 .categories {
-  border-right: 1px solid $additional;
   min-width: 179px;
 }
 
