@@ -1,7 +1,10 @@
 <template>
   <div class="categories">
     <div class="title">Catalog</div>
-    <div class="list">
+    <div class="loader" v-if="categoriesLoading">
+      <LoaderCategories />
+    </div>
+    <div v-else class="list">
       <router-link
         class="link"
         v-for="category in categories"
@@ -18,15 +21,19 @@
 
 <script>
 import { mapState } from "vuex";
+import LoaderCategories from "./loadercategories.vue";
 
 export default {
+  components: {
+    LoaderCategories,
+  },
   props: ["categories"],
   computed: {
-    ...mapState(["selectedCategory"]),
+    ...mapState("categories", ["selectedCategory", "categoriesLoading"]),
   },
   methods: {
     pushCategory(category) {
-      this.$store.dispatch("SELECT_CATEGORY", category);
+      this.$store.dispatch("categories/SELECT_CATEGORY", category);
     },
   },
 };
@@ -73,5 +80,9 @@ export default {
 
 .selected {
   color: red;
+}
+.loader {
+  position: absolute;
+  top: 30%;
 }
 </style>

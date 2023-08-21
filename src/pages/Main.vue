@@ -16,15 +16,20 @@ export default {
     Products,
   },
   computed: {
-    ...mapGetters(["CATEGORIES", "PRODUCTS"]),
+    ...mapGetters('categories', ["CATEGORIES"]),
+    ...mapGetters('products', ["PRODUCTS"]),
   },
   methods: {
-    ...mapActions(["GET_CATEGORIES_FROM_API", "GET_PRODUCTS_FROM_API"]),
+    ...mapActions('categories', ["GET_CATEGORIES_FROM_API", "SELECT_CATEGORY"]),
+    ...mapActions('products', ["GET_PRODUCTS_FROM_API"]),
   },
   mounted() {
     this.GET_CATEGORIES_FROM_API();
     this.GET_PRODUCTS_FROM_API();
+    this.SELECT_CATEGORY('All');
+
   },
+
 };
 </script>
 

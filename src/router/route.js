@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-// import Category from "@/pages/Category.vue";
+import store from "./../store/index";
 import About from "@/pages/About.vue";
 import Contacts from "@/pages/Contacts.vue";
 import Main from "@/pages/Main.vue";
@@ -10,6 +10,10 @@ const routes = [
     path: "/",
     component: Main,
     name: "main",
+    beforeEnter(to, from, next) {
+      store.dispatch("categories/SELECT_CATEGORY", "All");
+      next();
+    },
   },
   { path: "/category/:categoryId", component: Main, name: "category" },
   {

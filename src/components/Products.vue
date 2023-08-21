@@ -3,7 +3,8 @@
     <div class="first">
       <p class="selectedCategory">{{ selectedCategory }}</p>
     </div>
-    <div class="cards">
+       <div class="loader" v-if="productsLoading"><LoaderProducts /></div>
+    <div v-else class="cards">
       <Card v-for="product in FILTERED_PRODUCTS_BY_CATEGORY" :product="product" :key="product.id" />
     </div>
   </div>
@@ -12,12 +13,14 @@
 <script>
 import { mapGetters, mapState } from 'vuex';
 import Card from './Card.vue';
+import LoaderProducts from './LoaderProducts.vue';
 export default {
   props: ['products'],
-  components: { Card },
+  components: { Card, LoaderProducts },
   computed: {
-    ...mapGetters(['FILTERED_PRODUCTS_BY_CATEGORY']),
-    ...mapState(['selectedCategory'])
+    ...mapGetters('products', ['FILTERED_PRODUCTS_BY_CATEGORY']),
+    ...mapState('categories', ['selectedCategory']),
+    ...mapState('products', ['productsLoading'])
   }
 }
 
@@ -33,6 +36,8 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  // max-height: 1060px;
+  // overflow-y: auto;
 }
 
 .first {
@@ -45,5 +50,10 @@ font-size: 22px;
 }
 .selectedCategory::first-letter {
   text-transform: uppercase;
+}
+.loader {
+  position: absolute;
+  top: 40%;
+  left: 53%;
 }
 </style>
