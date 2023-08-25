@@ -3,7 +3,7 @@
     <img class="img" :src='product.image' alt="">
     <span class="title">{{ product.title }}</span>
     <div>
-      {{ product.rating.rate }}
+      {{ product.rating ? product.rating.rate : 'No rating' }}
     </div>
     <div>
       {{ product.price }}

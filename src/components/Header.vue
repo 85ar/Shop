@@ -1,6 +1,8 @@
 <template>
   <header class="header">
-    <router-link to="/" class="logo">Shop</router-link>
+    <router-link to="/" class="logo" @click="resetVisibleProductCount"
+      >Shop</router-link
+    >
     <div class="block">
       <nav class="nav">
         <ul class="ul">
@@ -44,6 +46,11 @@ export default {
         { path: "/contacts", label: "Contacts" },
       ],
     };
+  },
+  methods: {
+    resetVisibleProductCount() {
+      this.$store.dispatch("products/RESET_VISIBLE_PRODUCTS_COUNT");
+    },
   },
 };
 </script>

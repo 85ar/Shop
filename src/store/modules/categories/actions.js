@@ -15,7 +15,10 @@ export default {
       commit("SET_CATEGORIES_LOADING", false);
     }
   },
-  SELECT_CATEGORY({ commit }, category) {
+  async SELECT_CATEGORY({ commit, dispatch }, category) {
     commit("SET_SELECTED_CATEGORY_TO_STATE", category);
+    await dispatch("products/RESET_VISIBLE_PRODUCTS_COUNT", null, {
+      root: true,
+    });
   },
 };

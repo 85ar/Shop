@@ -12,6 +12,7 @@ const routes = [
     name: "main",
     beforeEnter(to, from, next) {
       store.dispatch("categories/SELECT_CATEGORY", "All");
+      store.dispatch("products/RESET_VISIBLE_PRODUCTS_COUNT");
       next();
     },
   },
