@@ -1,5 +1,5 @@
 <template>
-  <div class="categories">
+  <aside class="categories">
     <div class="title">Catalog</div>
     <div class="loader" v-if="categoriesLoading">
       <LoaderCategories />
@@ -16,7 +16,7 @@
         {{ category }}
       </router-link>
     </div>
-  </div>
+  </aside>
 </template>
 
 <script>
@@ -63,7 +63,12 @@ export default {
   margin-bottom: 8px;
   color: $secondary;
 }
-
+.link:hover {
+  color: $third;
+}
+.link::first-letter {
+  text-transform: uppercase;
+}
 .active {
   color: $accent;
 }
@@ -79,7 +84,7 @@ export default {
 }
 
 .selected {
-  color: red;
+  color: $accent;
 }
 .loader {
   position: absolute;

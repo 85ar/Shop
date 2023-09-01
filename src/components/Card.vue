@@ -30,6 +30,7 @@ export default {
   margin-bottom: 20px;
   border-radius: 20px;
   background: $primary;
+  margin-left: 20px;
 }
 
 .img {

@@ -21,15 +21,18 @@ const routes = [
     path: "/about",
     component: About,
     name: "about",
+    meta: { activeClass: "active" },
   },
   {
     path: "/contacts",
     component: Contacts,
     name: "contacts",
+    meta: { activeClass: "active" },
   },
   {
     path: "/favorite",
     component: Favorite,
+    name: "favorite",
   },
 ];
 

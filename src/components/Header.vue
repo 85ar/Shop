@@ -7,7 +7,8 @@
       <nav class="nav">
         <ul class="ul">
           <li v-for="link in links" :key="link.path" class="li">
-            <router-link :to="link.path" class="link">
+            <router-link :to="link.path" class="link" :class="{ active: isActive(link.path) }"
+            >
               {{ link.label }}</router-link
             >
           </li>
@@ -51,6 +52,9 @@ export default {
     resetVisibleProductCount() {
       this.$store.dispatch("products/RESET_VISIBLE_PRODUCTS_COUNT");
     },
+    isActive(route) {
+      return this.$route.path === route && route !== "/";
+    },
   },
 };
 </script>
@@ -73,6 +77,9 @@ export default {
 
 .link {
   color: $secondary;
+}
+.link:hover {
+  color: $third;
 }
 
 .logo {
@@ -112,5 +119,8 @@ export default {
 
 .btn {
   display: flex;
+}
+.active {
+  color: $third;
 }
 </style>

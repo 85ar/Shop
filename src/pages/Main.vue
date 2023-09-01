@@ -1,7 +1,7 @@
 <template>
   <div class="main">
-    <aside><Categories :categories="CATEGORIES" /></aside>
-    <div><Products :products="PRODUCTS" /></div>
+    <Categories :categories="CATEGORIES" />
+    <Products :products="PRODUCTS" />
   </div>
 </template>
 
