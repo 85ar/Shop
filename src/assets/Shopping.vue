@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: 'UserIcon'
+  name: 'ShopingIcon'
 }
 </script>
 

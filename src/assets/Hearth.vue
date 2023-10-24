@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'UserIcon'
+  name: 'HearthIcon'
 }
 </script>
 

@@ -2,6 +2,26 @@
   <div class="products">
     <div class="first">
       <div class="selectedCategory">{{ selectedCategory }}</div>
+      <div class="blocks">
+        <div class="searchBlock">
+          <input
+            type="text"
+            v-model="searchProduct"
+            class="inputSearch"
+            placeholder="Enter product name ..."
+          />
+          <div class="btnSearch">
+            <SearchProductIcon />
+          </div>
+        </div>
+        <div>
+          <label for="selectOption"></label>
+          <select class="sortBlock" v-model="selectedOption">
+            <option value="descending" class="sortItem">descending</option>
+            <option value="ascending " class="sortItem">ascending</option>
+          </select>
+        </div>
+      </div>
     </div>
     <div class="loader" v-if="productsLoading"><LoaderProducts /></div>
 
@@ -13,7 +33,7 @@
       />
     </div>
     <div v-if="filteredProducts.length === 0">No products in this category</div>
-    <div class="block">
+    <div class="loadMoreBlock">
       <button v-if="showLoadMoreButton" @click="loadMore" class="btn">
         See more
       </button>
@@ -29,20 +49,29 @@ import { mapGetters, mapState, mapActions } from "vuex";
 import Card from "./Card.vue";
 import LoaderProducts from "./LoaderProducts.vue";
 import UpIcon from "@/assets/Up.vue";
+import SearchProductIcon from "@/assets/SearchProduct.vue";
 export default {
   data() {
     return {
       showScrollButton: false,
+      searchProduct: "",
     };
   },
   props: ["products"],
-  components: { Card, LoaderProducts, UpIcon },
+  components: { Card, LoaderProducts, UpIcon, SearchProductIcon },
   computed: {
     ...mapGetters("products", ["FILTERED_PRODUCTS_BY_CATEGORY"]),
     ...mapState("categories", ["selectedCategory"]),
     ...mapState("products", ["productsLoading"]),
     filteredProducts() {
-      return this.FILTERED_PRODUCTS_BY_CATEGORY.products;
+      if (this.searchProduct.length !== 0) {
+        let newArr = this.filteredProducts.filter((item) => {
+          return item.title
+            .toLowerCase()
+            .includes(this.searchProduct.toLowerCase());
+        });
+        return newArr;
+      } else return this.FILTERED_PRODUCTS_BY_CATEGORY.products;
     },
     showLoadMoreButton() {
       const filteredProductsInfo = this.FILTERED_PRODUCTS_BY_CATEGORY;
@@ -96,6 +125,9 @@ export default {
 .first {
   margin-bottom: 20px;
   margin-left: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .selectedCategory {
   color: $accent;
@@ -125,7 +157,7 @@ export default {
 .btn:hover {
   color: $third;
 }
-.block {
+.loadMoreBlock {
   display: flex;
   margin-left: 20px;
 }
@@ -133,5 +165,43 @@ export default {
   position: absolute;
   right: 0;
   bottom: -18px;
+}
+.searchBlock {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid $additional;
+  margin-right: 20px;
+}
+.inputSearch {
+  opacity: 0.6;
+  color: $secondary;
+  font-family: Roboto;
+  font-size: 12px;
+  line-height: normal;
+  width: 520px;
+  height: 28px;
+  padding: 7px 10px;
+  outline: none;
+}
+.btnSearch {
+  display: flex;
+  padding: 6px 10px;
+}
+.blocks {
+  display: flex;
+  align-items: center;
+}
+.sortBlock {
+  border-radius: 8px;
+  border: 1px solid $additional;
+  width: 250px;
+  height: 28px;
+  color: rgba(51, 51, 51, 0.6);
+  font-family: Roboto;
+  font-size: 12px;
+  line-height: normal;
+  opacity: 0.6;
+  padding: 10px 7px;
 }
 </style>
