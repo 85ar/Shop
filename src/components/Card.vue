@@ -15,11 +15,11 @@
         <div class="price">$ {{ product.price }}</div>
         <div class="buyBlock">
           <div class="btnsAddDel">
-            <button><MinusIcon /></button>
-            <div>1</div>
-            <button><PlusIcon /></button>
+            <button class="btnMinus"><MinusIcon /></button>
+            <div>{{ count }}</div>
+            <button class="btnPlus"><PlusIcon /></button>
           </div>
-          <button>
+          <button class="btnAddCard">
             Add to card
             <ShoppingSmallIcon />
           </button>
@@ -34,6 +34,7 @@ import StarIcon from "@/assets/Star.vue";
 import ShoppingSmallIcon from "@/assets/ShoppingSmall.vue";
 import MinusIcon from "@/assets/Minus.vue";
 import PlusIcon from "@/assets/Plus.vue";
+import { mapState } from "vuex";
 export default {
   props: ["product"],
   components: {
@@ -42,20 +43,21 @@ export default {
     MinusIcon,
     PlusIcon,
   },
+  computed: {
+...mapState('products', ['count'])
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .card {
   width: 250px;
-  // height: 340px;
   filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.25));
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 20px;
   background: $primary;
   margin-left: 20px;
-
 }
 .imgBlock {
   width: 170px;
@@ -93,7 +95,7 @@ export default {
 .price {
   color: $secondary;
   font-family: Roboto;
-  font-size: 14px;
+  font-size: 12px;
   line-height: normal;
   margin-bottom: 6px;
 }
@@ -102,6 +104,10 @@ export default {
   text-align: center;
   font-family: Roboto;
   font-size: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .btnsAddDel {
   display: flex;
@@ -111,5 +117,22 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.btnAddCard {
+  display: flex;
+  align-items: center;
+}
+.shoppingSmall {
+  margin-left: 4px;
+}
+.btnMinus {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+.btnPlus {
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
 }
 </style>

@@ -7,6 +7,8 @@ export default {
   state: () => ({
     products: [],
     productsLoading: false,
+    price: null,
+    count: 0,
   }),
 
   mutations: mutations,

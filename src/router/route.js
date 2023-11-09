@@ -4,6 +4,7 @@ import About from "@/pages/About.vue";
 import Contacts from "@/pages/Contacts.vue";
 import Main from "@/pages/Main.vue";
 import Favorite from "@/pages/Favorite.vue";
+import CardInfo from "@/components/CardInfo.vue";
 
 const routes = [
   {
@@ -17,6 +18,7 @@ const routes = [
     },
   },
   { path: "/category/:categoryId", component: Main, name: "category" },
+  { path: "/cards/:cardId", component: CardInfo, name: "cardInfo" },
   {
     path: "/about",
     component: About,

@@ -52,4 +52,10 @@ export default {
   RESET_VISIBLE_PRODUCTS_COUNT({ commit }) {
     commit("RESET_VISIBLE_PRODUCTS_COUNT");
   },
+  SET_PRICE_PRODUCT({ commit }, payload) {
+    commit("SET_PRICE_PRODUCT_TO_STATE", payload);
+  },
+  SET_COUNT_PRODUCT({ commit }, payload) {
+    commit("SET_COUNT_PRODUCTS_TO_STATE", payload);
+  },
 };

@@ -11,4 +11,10 @@ export default {
   RESET_VISIBLE_PRODUCTS_COUNT(state) {
     state.visibleProductsCount = 8;
   },
+  SET_PRICE_PRODUCT_TO_STATE(state, price) {
+    state.price = price;
+  },
+  SET_COUNT_PRODUCTS_TO_STATE(state, count) {
+    state.count = count;
+  },
 };

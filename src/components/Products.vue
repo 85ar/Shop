@@ -30,6 +30,7 @@
         v-for="product in filteredProducts"
         :product="product"
         :key="product.id"
+        @click="cardClick(product)"
       />
     </div>
     <div v-if="filteredProducts.length === 0">No products in this category</div>
@@ -55,6 +56,7 @@ export default {
     return {
       showScrollButton: false,
       searchProduct: "",
+      selectedOption: null,
     };
   },
   props: ["products"],
@@ -99,6 +101,10 @@ export default {
     handleScroll() {
       this.showScrollButton = window.scrollY > 600;
     },
+    cardClick(obj) {
+      console.log('product', obj.id);
+      this.$router.push('cardInfo', obj.id)
+    }
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
